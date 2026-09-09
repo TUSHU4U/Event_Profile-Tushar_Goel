@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tushar Goel — Event Production & Hospitality</title>
+
+<!-- Fonts: Fraunces (display) for names/headings, Work Sans (body) for everything else -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ============================================================
+   EDIT ZONE 1 — COLORS, FONTS & SPACING
+   Change these variables to re-skin the whole page at once.
+   ============================================================ */
+:root{
+  --ink:        #1c1712;   /* header / footer background */
+  --ink-line:   #3a3128;   /* hairline borders on dark bg */
+  --paper:      #f7f2e7;   /* main page background */
+  --paper-line: #e3d7bd;   /* hairline borders on light bg */
+  --text:       #2b2318;   /* main body text */
+  --muted:      #6d6151;   /* secondary / caption text */
+  --cream:      #fffaf0;   /* tag / pill background */
+  --gold:       #caa15a;   /* accent on dark backgrounds */
+  --gold-deep:  #8f6a24;   /* accent on light backgrounds (better contrast) */
+  --wine:       #7c2635;   /* small sparing accent */
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body:    "Work Sans", -apple-system, "Segoe UI", sans-serif;
+
+  --max-width: 900px;
+}
+
+/* ============================================================
+   BASE / RESET
+   ============================================================ */
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1,h2,h3{ margin: 0; font-family: var(--font-display); font-weight: 600; }
+p{ margin: 0; }
+ul{ margin: 0; padding: 0; list-style: none; }
+a{ color: inherit; text-decoration: none; }
+:focus-visible{ outline: 2px solid var(--gold-deep); outline-offset: 3px; }
+
+.wrap{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  background: var(--ink);
+  color: var(--paper);
+  padding: 64px 0 40px;
+}
+.hero .eyebrow{
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+.hero h1{
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  line-height: 1.05;
+  margin-top: 10px;
+  color: var(--paper);
+}
+.hero .role{
+  margin-top: 14px;
+  max-width: 46ch;
+  font-size: 1.05rem;
+  color: #d8cdb9;
+}
+
+/* meta row: age / location / height / languages, separated with a thin rule not text characters */
+.meta-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 22px;
+  margin-top: 28px;
+  font-size: 0.92rem;
+  color: #cfc3ab;
+}
+.meta-row span{
+  padding-left: 22px;
+  border-left: 1px solid var(--ink-line);
+}
+.meta-row span:first-child{
+  padding-left: 0;
+  border-left: none;
+}
+
+/* hero layout: text + headshot */
+.hero-top{
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.hero-text{ flex: 1; min-width: 0; }
+.hero-photo{ flex: none; width: 180px; }
+.hero-photo img{
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--ink-line);
+  display: block;
+}
+
+/* contact pills in hero */
+.contact-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+.pill-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--ink-line);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--paper);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.pill-btn:hover{
+  border-color: var(--gold);
+  background: rgba(202,161,90,0.08);
+}
+.pill-btn svg{ width: 15px; height: 15px; flex: none; }
+
+/* ============================================================
+   STAT STRIP
+   ============================================================ */
+.stats{
+  background: var(--ink);
+  border-top: 1px solid var(--ink-line);
+}
+.stats .wrap{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 28px 24px 44px;
+}
+.stat-num{
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label{
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: #b7ab93;
+}
+
+/* ============================================================
+   SECTIONS (light body)
+   ============================================================ */
+.section{
+  padding: 44px 0;
+  border-top: 1px solid var(--paper-line);
+}
+.section-title{
+  font-size: 1.5rem;
+}
+.section-sub{
+  margin-top: 8px;
+  color: var(--muted);
+  max-width: 62ch;
+  font-size: 0.98rem;
+}
+
+/* About / positioning */
+.about p{
+  max-width: 68ch;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+.about p + p{ margin-top: 14px; }
+
+/* Ranked strengths */
+.rank-list{
+  margin-top: 26px;
+  display: grid;
+  gap: 18px;
+}
+.rank-item{
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--paper-line);
+}
+.rank-item:last-child{ border-bottom: none; padding-bottom: 0; }
+.rank-num{
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--gold-deep);
+  width: 2ch;
+  flex: none;
+}
+.rank-name{
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+/* Tag / pill lists — used for companies, venues, artists */
+.tag-list{
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag{
+  background: var(--cream);
+  border: 1px solid var(--paper-line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 0.86rem;
+  color: var(--text);
+}
+.tag.note{
+  color: var(--muted);
+}
+
+/* Signature work — two-column category grid */
+.work-grid{
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px 40px;
+}
+.work-block h3{
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: none;
+  color: var(--gold-deep);
+  border-bottom: 1px solid var(--paper-line);
+  padding-bottom: 10px;
+}
+.work-block ul{
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+.work-block li{
+  font-size: 0.93rem;
+  line-height: 1.45;
+}
+.work-block li .role{
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+/* Photo galleries */
+.gallery{
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.gallery-item img{
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--paper-line);
+  display: block;
+}
+.gallery-cap{
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* Working style checklist */
+.check-grid{
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 32px;
+}
+.check-item{
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 0.98rem;
+}
+.check-item svg{
+  width: 20px; height: 20px; flex: none; margin-top: 2px;
+  color: var(--gold-deep);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{
+  background: var(--ink);
+  color: var(--paper);
+  padding: 48px 0 40px;
+  margin-top: 0;
+}
+.footer-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.footer-label{
+  font-size: 0.78rem;
+  color: var(--gold);
+}
+.footer-value{
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: #e7dcc6;
+}
+.footer .contact-row{
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--ink-line);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 680px){
+  .stats .wrap{ grid-template-columns: repeat(2, 1fr); }
+  .work-grid{ grid-template-columns: 1fr; }
+  .check-grid{ grid-template-columns: 1fr; }
+  .footer-grid{ grid-template-columns: repeat(2, 1fr); gap: 24px 16px; }
+  .hero{ padding: 48px 0 32px; }
+  .section{ padding: 36px 0; }
+  .hero-top{ flex-direction: column; gap: 24px; }
+  .hero-photo{ width: 140px; }
+  .gallery{ grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   PRINT — so this looks clean if saved/printed as PDF
+   ============================================================ */
+@media print{
+  body{ background: #fff; }
+  .hero, .stats, .footer{
+    background: #fff !important;
+    color: var(--text) !important;
+    border-top: 1px solid var(--paper-line);
+  }
+  .hero h1, .footer-value, .stat-num{ color: var(--text) !important; }
+  .hero .role, .meta-row, .stat-label, .footer-label{ color: var(--muted) !important; }
+  .meta-row span, .pill-btn{ border-color: var(--paper-line) !important; }
+  .pill-btn{ color: var(--text) !important; }
+  .section{ padding: 24px 0; }
+  a[href]:after{ content: none; }
+  .hero-photo img{ border-color: var(--paper-line); }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- ============================================================
+       EDIT ZONE 2 — HERO (name, tagline, basic details, contact)
+       ============================================================ -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <div class="hero-text">
+          <p class="eyebrow">Freelance Profile</p>
+          <h1>Tushar Goel</h1>
+          <p class="role">Event Production &amp; Hospitality Manager. I handle weddings, corporate events and live productions across Delhi NCR, Pan-India and destination locations.</p>
+
+          <div class="meta-row">
+            <span>24 yrs</span>
+            <span>Delhi NCR</span>
+            <span>5&prime;6&Prime;</span>
+            <span>English, Hindi</span>
+          </div>
+
+          <div class="contact-row">
+            <a class="pill-btn" href="tel:8766232900">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.6 21 3 14.4 3 6a2 2 0 0 1 2-2Z"/></svg>
+              87662 32900
+            </a>
+            <a class="pill-btn" href="tel:9953889743">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.6 21 3 14.4 3 6a2 2 0 0 1 2-2Z"/></svg>
+              99538 89743
+            </a>
+            <a class="pill-btn" href="https://instagram.com/itushargoel" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+              @itushargoel
+            </a>
+          </div>
+        </div>
+
+        <!-- EDIT: swap this photo any time — just replace images/headshot.jpg -->
+        <div class="hero-photo">
+          <img src="images/headshot.jpg" alt="Tushar Goel">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       EDIT ZONE 3 — HEADLINE STATS
+       ============================================================ -->
+  <div class="stats">
+    <div class="wrap">
+      <div>
+        <div class="stat-num">4.5+</div>
+        <div class="stat-label">Years in the industry</div>
+      </div>
+      <div>
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Weddings (20+ big-fat / luxury)</div>
+      </div>
+      <div>
+        <div class="stat-num">160+</div>
+        <div class="stat-label">Total events produced</div>
+      </div>
+      <div>
+        <div class="stat-num">Pan-India</div>
+        <div class="stat-label">Plus destination weddings</div>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+
+    <!-- ============================================================
+         EDIT ZONE 4 — ABOUT / POSITIONING
+         ============================================================ -->
+    <section class="section about">
+      <h2 class="section-title">Positioning</h2>
+      <p style="margin-top:14px;">I don't stick to one type of event. Same month I could be running production on a destination wedding and leading show-flow at a techno night. 4.5 years working directly with wedding planners, event companies and 5-star hotels across India.</p>
+      <p style="margin-top:14px;">Currently taking on freelance and project-based work. Fully available, any format.</p>
+    </section>
+
+    <!-- ============================================================
+         EDIT ZONE 5 — TOP STRENGTHS (ranked)
+         ============================================================ -->
+    <section class="section">
+      <h2 class="section-title">Strongest roles</h2>
+      <p class="section-sub">In the order I rely on them most, on-ground.</p>
+      <div class="rank-list">
+        <div class="rank-item"><span class="rank-num">1</span><span class="rank-name">Event Production</span></div>
+        <div class="rank-item"><span class="rank-num">2</span><span class="rank-name">Venue Management</span></div>
+        <div class="rank-item"><span class="rank-num">3</span><span class="rank-name">Vendor Management / Coordination</span></div>
+        <div class="rank-item"><span class="rank-num">4</span><span class="rank-name">Artist Management</span></div>
+        <div class="rank-item"><span class="rank-num">5</span><span class="rank-name">Hospitality Management</span></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         EDIT ZONE 6 — COMPANIES & AGENCIES
+         ============================================================ -->
+    <section class="section">
+      <h2 class="section-title">Companies &amp; agencies worked with</h2>
+      <div class="tag-list">
+        <span class="tag">Innovative Wedding India (1.5 Yrs, Full-time)</span>
+        <span class="tag">The Functions Empire (2 Yrs, Full-time)</span>
+        <span class="tag">Wedding Darzi (Freelance)</span>
+        <span class="tag">One Point Weddings (Regular Freelance)</span>
+        <span class="tag">Whistling Teel</span>
+        <span class="tag">Indian Wedding Planner</span>
+        <span class="tag">The Delhi Wedding Company</span>
+        <span class="tag">Golden Dove Events</span>
+        <span class="tag">Weddingsbyesl</span>
+        <span class="tag">Wedding Kalakaar</span>
+        <span class="tag">Wizcraft Weddings</span>
+        <span class="tag">Atarangi Events</span>
+      </div>
+      <p class="section-sub" style="margin-top:20px;">Also worked directly as Event Sales &amp; Production Manager with banquets:</p>
+      <div class="tag-list">
+        <span class="tag">The Mayfair Grand, Noida 135</span>
+        <span class="tag">Silver Spoon, Vasundhara</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         EDIT ZONE 7 — VENUES & 5-STAR HOTELS
+         ============================================================ -->
+    <section class="section">
+      <h2 class="section-title">Venues &amp; luxury properties</h2>
+      <p class="section-sub">Including destinations like Jaipur, Udaipur, Goa and Jim Corbett.</p>
+      <div class="tag-list">
+        <span class="tag">Jai Mahal Palace, Jaipur</span>
+        <span class="tag">The Westin, Sohna</span>
+        <span class="tag">Noor Mahal, Karnal</span>
+        <span class="tag">JW Marriott, Mussoorie</span>
+        <span class="tag">Taj Corbett Resort &amp; Spa, Jim Corbett</span>
+        <span class="tag">Pullman, Aerocity</span>
+        <span class="tag">Roseate, NH8</span>
+        <span class="tag">Bella Monde</span>
+        <span class="tag">Grand Hyatt, Goa</span>
+        <span class="tag">Fairmont, Jaipur</span>
+        <span class="tag">Le Meridien, Gurgaon</span>
+        <span class="tag">Le Meridien, Delhi</span>
+        <span class="tag">Le Meridien, Jaipur</span>
+        <span class="tag">Le Meridien, Kolkata</span>
+        <span class="tag">Taj Palace, Lucknow</span>
+        <span class="tag">ITC Grand Bharat, Gurgaon</span>
+        <span class="tag">Heritage Village, Gurgaon</span>
+        <span class="tag">Taj Fort Aguada, Goa</span>
+        <span class="tag">ITC Mughal, Agra</span>
+        <span class="tag">Stellar</span>
+        <span class="tag">Nikunj</span>
+        <span class="tag">Jaypee Greens, Noida</span>
+        <span class="tag">The Leela, Delhi</span>
+        <span class="tag">ITC Maurya</span>
+        <span class="tag">Taj Damdama, Gurgaon</span>
+        <span class="tag">Andaz, Delhi</span>
+        <span class="tag">ADot</span>
+        <span class="tag">Sunday Resort, Manesar</span>
+        <span class="tag">Farms in Chhattarpur</span>
+        <span class="tag note">+ many more</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         EDIT ZONE 8 — SIGNATURE WORK (add/remove <li> as needed)
+         ============================================================ -->
+    <section class="section">
+      <h2 class="section-title">Signature work</h2>
+      <div class="work-grid">
+
+        <div class="work-block">
+          <h3>Live music &amp; techno production</h3>
+          <ul>
+            <li>Cirqea — Dirty Good, INA <span class="role">Production &amp; PR, direct with organisers</span></li>
+            <li>Techno Takeover India <span class="role">Production, freelance</span></li>
+            <li>Eden of Sound, 2025–26 <span class="role">Production, PR &amp; hospitality</span></li>
+            <li>Namascray — Cray's Raas Holi, Bella Monde <span class="role">Production &amp; décor</span></li>
+            <li>Bismil ki Mehfil live concert, JLN Stadium <span class="role">Production team lead, with Yours Events</span></li>
+          </ul>
+        </div>
+
+        <div class="work-block">
+          <h3>Corporate &amp; brand events</h3>
+          <ul>
+            <li>World of Wonder, Noida <span class="role">Corporate event</span></li>
+            <li>Money Tree — Diwali Celebration 2025 <span class="role">Design, production, hospitality, show-flow</span></li>
+            <li>Bhutani Group — Birthday Celebration <span class="role">Design, production, hospitality, show-flow</span></li>
+            <li>Ace Group — Property Sale Event <span class="role">Design, production, hospitality, show-flow</span></li>
+            <li>Appinventiv — 10 Years Celebration <span class="role">Design, production, hospitality, show-flow</span></li>
+            <li>Appsquadz — Success Party <span class="role">Design, production, hospitality, show-flow</span></li>
+            <li>T-Series fashion shows, Noida Film City <span class="role">Regular production partner</span></li>
+            <li>Arihant Group — Property Launch <span class="role">Event management, production, hospitality</span></li>
+            <li>Smart World — Property Sale Event, Noida <span class="role">Event management, production, hospitality</span></li>
+            <li>Eleque — Product Launch <span class="role">Event management, production, hospitality</span></li>
+          </ul>
+        </div>
+
+        <div class="work-block">
+          <h3>Government, spiritual &amp; social</h3>
+          <ul>
+            <li>"Ek Ped Maa Ke Naam" tree plantation drive, Delhi <span class="role">With the Ministry of Forest and Wildlife — marketing, technical &amp; production lead, one month</span></li>
+            <li>Brahma Kumaris spiritual event <span class="role">Event management</span></li>
+            <li>Samridhi — Reward &amp; Recognition event <span class="role">Event management</span></li>
+            <li>Rasraj Ji Maharaj — Sunder Kand <span class="role">Event design</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         EDIT ZONE 8B — PHOTOS: ON-SITE
+         Replace/add <div class="gallery-item"> blocks as needed.
+         ============================================================ -->
+    <section class="section">
+      <h2 class="section-title">In the field</h2>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="images/team-onsite.jpg" alt="On-site management team at Talent Meet 2025">
+          <p class="gallery-cap">On-site with the management team, Talent Meet 2025</p>
+        </div>
+        <div class="gallery-item">
+          <img src="images/lobby-professional.jpg" alt="On duty at a hotel">
+          <p class="gallery-cap">On duty at a 5-star property</p>
+        </div>
+        <div class="gallery-item">
+          <img src="images/corporate-suit.jpg" alt="At a corporate brand event">
+          <p class="gallery-cap">At a corporate brand event</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         EDIT ZONE 9 — ARTISTS & TALENT
+         ============================================================ -->
+    <section class="section">
+      <h2 class="section-title">Artists &amp; talent worked with</h2>
+      <div class="tag-list">
+        <span class="tag">Saina Nehwal</span>
+        <span class="tag">Suresh Raina</span>
+        <span class="tag">Harsh Gujral</span>
+        <span class="tag">Akash Gupta</span>
+        <span class="tag">Instadhoom</span>
+        <span class="tag">Solto Music</span>
+        <span class="tag">Almost Human</span>
+        <span class="tag">DJ Ganesh</span>
+        <span class="tag">Indo Warehouse</span>
+        <span class="tag">Echonamah</span>
+        <span class="tag">Sagar Bhatia</span>
+        <span class="tag">Shilpa Shetty</span>
+        <span class="tag">Sunil Grover</span>
+        <span class="tag">Sunanda Sharma</span>
+        <span class="tag">Indeep Bakshi</span>
+        <span class="tag">Jassie Gill</span>
+        <span class="tag">Hardy Sandhu</span>
+        <span class="tag">Nizami Bandhu</span>
+        <span class="tag">Vijay Jammer</span>
+        <span class="tag">Ahsaas Band</span>
+        <span class="tag">Kamal Wassan</span>
+        <span class="tag">Anchor JK</span>
+        <span class="tag">Pranjal Dahiya</span>
+        <span class="tag">Ajay Hooda</span>
+        <span class="tag">Honey Singh</span>
+        <span class="tag">Sapna Chaudhary</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         EDIT ZONE 9B — PHOTOS: NOTABLE MOMENTS
+         These came from Instagram story screenshots — swap in clean
+         versions any time by replacing the image files.
+         ============================================================ -->
+    <section class="section">
+      <h2 class="section-title">Notable moments</h2>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="images/with-nehwal.jpg" alt="With Saina Nehwal">
+          <p class="gallery-cap">With Saina Nehwal</p>
+        </div>
+        <div class="gallery-item">
+          <img src="images/with-raina.jpg" alt="With Suresh Raina">
+          <p class="gallery-cap">With Suresh Raina</p>
+        </div>
+        <div class="gallery-item">
+          <img src="images/with-instadhoom.jpg" alt="With the vocalist of Instadhoom">
+          <p class="gallery-cap">With the vocalist of Instadhoom</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         EDIT ZONE 10 — WORKING STYLE
+         ============================================================ -->
+    <section class="section">
+      <h2 class="section-title">What I bring on-site</h2>
+      <div class="check-grid">
+        <div class="check-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          Good at handling people and large guest groups
+        </div>
+        <div class="check-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          Don't panic when something goes wrong
+        </div>
+        <div class="check-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          Strong, dependable vendor relationships
+        </div>
+        <div class="check-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          Can stay active through long production hours
+        </div>
+        <div class="check-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          Precise at following production instructions
+        </div>
+        <div class="check-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+          Fast, practical problem-solving on the ground
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       EDIT ZONE 11 — FOOTER (education, availability, contact)
+       ============================================================ -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-label">Education</div>
+          <div class="footer-value">BA, Zakir Hussain College, 2025</div>
+        </div>
+        <div>
+          <div class="footer-label">Positioning</div>
+          <div class="footer-value">Hybrid — weddings, corporate &amp; live production</div>
+        </div>
+        <div>
+          <div class="footer-label">Availability</div>
+          <div class="footer-value">Open to all event types &amp; formats</div>
+        </div>
+        <div>
+          <div class="footer-label">Freelance</div>
+          <div class="footer-value">Available for freelance &amp; project work</div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <a class="pill-btn" href="tel:8766232900">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.6 21 3 14.4 3 6a2 2 0 0 1 2-2Z"/></svg>
+          87662 32900
+        </a>
+        <a class="pill-btn" href="https://instagram.com/itushargoel" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+          @itushargoel
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
